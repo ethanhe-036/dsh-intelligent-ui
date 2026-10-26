@@ -1,0 +1,150 @@
+{
+  "name": "dsh-intelligent-ui",
+  "version": "0.3.0",
+  "description": "Preset scoped controlled Intelligent UI for DeepSeek Harness and embedded React hosts",
+  "type": "module",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./tools": {
+      "types": "./dist/types/tools.d.ts",
+      "default": "./dist/tools.js"
+    },
+    "./core": {
+      "types": "./dist/types/core.d.ts",
+      "default": "./dist/core.js"
+    },
+    "./state": {
+      "types": "./dist/types/state.d.ts",
+      "default": "./dist/state.js"
+    },
+    "./react": {
+      "types": "./dist/types/renderer.d.ts",
+      "default": "./dist/react.js"
+    },
+    "./client": {
+      "types": "./dist/types/client.d.ts",
+      "default": "./dist/client.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "schemas",
+    "cordis.patch.yml",
+    "LICENSE",
+    "THIRD-PARTY-NOTICES",
+    "docs/acceptance.md",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=22.18.0",
+    "dsh": "0.2.1-rc.3"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-theme",
+        "@deepseek-ai/dsh-client-ui-chat",
+        "@deepseek-ai/dsh-client-ui-renderer"
+      ],
+      "platform": "web"
+    }
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
+    "test": "pnpm catalog:check && pnpm preset:check && vitest run",
+    "catalog:check": "node scripts/generate-catalog.mjs --check",
+    "preset:check": "node scripts/generate-preset.mjs --check"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "4.0.5",
+    "@deepseek-ai/dsh-client-connection": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-llm": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-session": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-typert-protocol": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-storage-domain": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-system-prompt": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-tools": "0.2.1-rc.3",
+    "react": ">=18.2.0 <20"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "@deepseek-ai/cordis": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-tools": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-system-prompt": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-storage-domain": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@assistant-ui/generative-ui": "0.0.7",
+    "@deepseek-ai/cordis": "4.0.5",
+    "@deepseek-ai/dsh": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-agent": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-agent-preset": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-api-remotes": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-api-session-controller": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-attachment": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-client-connection": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-client-ui-chat": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-client-ui-conversation": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-client-ui-renderer": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-client-ui-slots": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-client-ui-theme": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-jobs": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-llm": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-llm-retry": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-session": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-session-persistence": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-session-query": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-storage-domain": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-system-prompt": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-tools": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-typert-protocol": "0.2.1-rc.3",
+    "@napi-rs/canvas": "1.0.9",
+    "@types/node": "24.13.3",
+    "@types/react": "19.2.2",
+    "dts-bundle-generator": "9.5.1",
+    "esbuild": "0.25.12",
+    "generative-frame": "0.0.8",
+    "jsdom": "26.1.0",
+    "playwright": "1.62.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "typescript": "^5.0.0",
+    "vitest": "^3.0.0",
+    "zod": "4.4.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ethanhe-036/dsh-intelligent-ui.git"
+  },
+  "homepage": "https://github.com/ethanhe-036/dsh-intelligent-ui#readme",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "generative-ui"
+  ],
+  "packageManager": "pnpm@10.26.2"
+}

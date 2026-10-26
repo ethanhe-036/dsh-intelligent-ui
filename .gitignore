@@ -1,0 +1,7 @@
+node_modules/
+.local/
+.artifacts/
+.env
+.env.*
+*.tgz
+coverage/

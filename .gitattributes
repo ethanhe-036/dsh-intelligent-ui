@@ -1,0 +1,3 @@
+* text=auto eol=lf
+# 预构建文件含第三方源码，保留其字面量和空白。
+dist/** linguist-generated=true -whitespace

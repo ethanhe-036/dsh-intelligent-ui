@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "types": ["react"], "lib": ["ESNext", "DOM"] },
+  "include": ["dist/types/core.d.ts", "dist/types/state.d.ts", "dist/types/renderer.d.ts"]
+}
