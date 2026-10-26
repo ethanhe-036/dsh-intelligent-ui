@@ -1,8 +1,8 @@
 # DSH Intelligent UI
 
 在 DeepSeek Harness 对话中生成可交互表格、图表、清单、表单和计算器。
-当前版本 `0.3.0` 面向 **DSH `0.2.1-rc.3`**，也提供独立 React 嵌入入口。
-其他 DSH 版本尚未验证；具体场景与限制见 [验收记录](docs/acceptance.md)。
+当前版本 `0.4.0` 面向 **DSH `0.2.1-rc.3`**，也提供独立 React 嵌入入口。
+其他 DSH 版本尚未验证；具体场景与限制见 [0.4.0 验收记录](docs/acceptance-0.4.0.md)。
 
 ## 安装
 
@@ -12,12 +12,17 @@
 https://github.com/ethanhe-036/dsh-intelligent-ui
 ```
 
-安装后新建会话，选择 **intelligent-ui-preset**。它复制该版本标准模式的完整插件树，
-保留标准工具、配置及禁用状态，只增加 Intelligent UI 工具。原有标准模式保持原样。
-已经创建的会话不会自动切换 Preset。
+安装并启用后，直接新建 **标准模式** 会话使用。生成工具和配套指引默认在全局注册，
+使用原生工具调用的其他 Preset 也可以继承；各 Preset 的显式工具限制仍然有效。
+无需切换到 `intelligent-ui-preset`。这个旧 Preset 仅保留历史会话入口，仍使用原有标准组合，
+通过全局继承获得 UI 能力，不再单独注册同名工具。
+
+从 0.3.0 更新时，在插件页卸载旧包，再用同一仓库地址安装并启用新版；不要删除会话数据。
+新建标准模式会话即可验证新版。PTC / `run_code` 嵌套调用目前不支持本插件，不能将全局注册理解为所有调用模式均已适配。
 
 仓库包含预构建 `dist/`，安装不依赖本机 TypeScript 构建或安装脚本。也可以在「添加插件」中
-填入本仓库的本地绝对目录。此包尚未发布到 npm，不能直接使用 npm 包名安装。
+填入本仓库的本地绝对目录。本项目尚未发布到 npm；npm 上同名 `dsh-intelligent-ui` 属于其他项目，
+请使用上述 GitHub 地址安装。
 
 例如：
 
@@ -31,7 +36,7 @@ https://github.com/ethanhe-036/dsh-intelligent-ui
 组件、公式、状态和增量解析复用 @assistant-ui/generative-ui 0.0.7 与 generative-frame 0.0.8 spec。
 包内不包含业务系统类型、模型凭据或第二 Agent Loop。
 
-宿主只装配一次根入口，目标 Preset 使用 dsh-intelligent-ui/tools 注册工具和目录。
+宿主只装配一次根入口，默认 Bundle 在全局装配 `dsh-intelligent-ui/tools` 注册工具和目录。
 每个真实直接调用创建新 UI；标题只展示，Code Mode/嵌套调用不提供渐进展示。
 普通用户状态由宿主保存，模型只接收用户明确发送时冻结的值。
 
@@ -108,7 +113,8 @@ pnpm test
 pnpm build
 ```
 
-`pnpm test` 包含目录与完整 Preset 快照检查、状态/来源/发送测试和 JSDOM 单选分组测试。
+`pnpm test` 包含目录、全局装配与旧 Preset 快照检查，原生作用域继承/限制/卸载，
+状态/来源/发送测试和 JSDOM 单选分组测试。
 13 个浏览器色彩测试为可选门禁：安装 Playwright 浏览器后，设置 `IUI_BROWSER_TESTS=1`，
 再运行 `pnpm exec vitest run tests/catalog-surface.browser.spec.ts`。
 `IUI_BROWSER_ENGINES=chromium,firefox,webkit` 可选择引擎，默认 Chromium。

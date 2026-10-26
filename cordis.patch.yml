@@ -1,7 +1,9 @@
-# DSH 0.2.1-rc.3 标准模式的完整快照；由 scripts/generate-preset.mjs 生成。
+# UI 工具默认全局启用；旧 Preset 保留历史会话入口。由 scripts/generate-preset.mjs 生成。
 - insert:
     - id: intelligent-ui
       name: dsh-intelligent-ui
+    - id: intelligent-ui-tools
+      name: dsh-intelligent-ui/tools
 - insert:
     - id: preset-intelligent-ui
       name: '@deepseek-ai/dsh-agent-preset'
@@ -127,5 +129,3 @@
           - id: tool-plugin-market
             name: '@deepseek-ai/dsh-plugin-market/tools'
             disabled: true
-          - id: intelligent-ui-tools
-            name: dsh-intelligent-ui/tools

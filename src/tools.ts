@@ -9,7 +9,7 @@ const formulaGuidance = "Each $calc accepts at most 500 characters and 32 nestin
 export const name = "dsh-intelligent-ui-tools";
 export const inject = ["tools", "systemPrompt"];
 
-/** 工具和目录只装配于目标 Preset；不读宿主用户状态，不创建新的 Agent 回合。 */
+/** 工具和目录按调用方作用域注册；默认 Bundle 全局装配，不读取用户状态或创建 Agent 回合。 */
 export function apply(ctx: Context): void {
   registerIntelligentUiTools(ctx);
 }
